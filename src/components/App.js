@@ -1,11 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../styles/App.css';
 import '../test'
-// import normalpic from '../img/normal.jpg'
-// import altpic from '../img/alt.jpg'
-// import codepic from '../img/code.jpg'
 
-class App extends Component {
+class App extends React.Component {
   render() {
     return ''
   }

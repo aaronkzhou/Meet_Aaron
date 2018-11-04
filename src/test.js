@@ -1,14 +1,16 @@
 import anime from 'animejs'
 import charming from 'charming'
 import imagesLoaded from 'imagesloaded'
-import { extend } from './helper'
-import { PieceMaker } from './helper/piece-maker'
-import { GlitchFx } from './helper/glitchfx'
+import PieceMaker from './helper/piece-maker'
+import GlitchFx from './helper/glitchfx'
 
 (window => {
   const DOM = {};
-  let pm, gfx;
-  let mode = 'design', disablePageFx, isAnimating;
+  let pm;
+  let gfx;
+  let mode = 'design';
+  let disablePageFx;
+  let isAnimating;
 
   window.PieceMaker = PieceMaker;
   window.GlitchFx = GlitchFx;
@@ -341,8 +343,7 @@ import { GlitchFx } from './helper/glitchfx'
     };
     animeOpts.easing = dir === 'in' ? 'easeInQuint' : 'easeOutQuint';
     animeOpts.opacity = dir === 'in' ? [0, 1] : [1, 0];
-    extend(animeOpts, extraAnimeOpts);
-
+    Object.assign(animeOpts, extraAnimeOpts);
     anime.remove(animeOpts.targets);
     anime(animeOpts);
   }

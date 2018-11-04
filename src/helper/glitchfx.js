@@ -1,10 +1,9 @@
-import { extend } from './'
-import { getRandomInt } from './'
+import { random } from 'lodash'
 
-export class GlitchFx {
+export default class GlitchFx {
     constructor(elems, options) {
         this.elems = [].slice.call(elems);
-        this.options = extend({}, {
+        this.options = Object.assign({}, {
             // Max and Min values for the time when to start the glitch effect.
             glitchStart: {min: 500, max: 4000},
             // Max and Min values of time that an element keeps each glitch state. 
@@ -13,7 +12,7 @@ export class GlitchFx {
             // Number of times the class is changed per glitch iteration.
             glitchTotalIterations: 6
         });
-        extend(this.options, options);
+        Object.assign(this.options, options);
         this.glitch();
     }
 
@@ -28,7 +27,7 @@ export class GlitchFx {
                     self.glitch();
                 }
             });
-        }, getRandomInt(this.options.glitchStart.min, this.options.glitchStart.max));
+        }, random(this.options.glitchStart.min, this.options.glitchStart.max));
     }
 
     _glitchState(callback) {
@@ -45,7 +44,7 @@ export class GlitchFx {
                         el.classList.add('mode--code');
                         el.classList.remove('mode--design');
                     }
-                    el.style.transform = self.iteration%2 !== 0 ? 'translate3d(0,0,0)' : 'translate3d(' + getRandomInt(-5,5) + 'px,' + getRandomInt(-5,5) + 'px,0)';
+                    el.style.transform = self.iteration%2 !== 0 ? 'translate3d(0,0,0)' : 'translate3d(' + random(-5,5) + 'px,' + random(-5,5) + 'px,0)';
                 });
 
                 self.iteration++;
@@ -53,7 +52,7 @@ export class GlitchFx {
                     self._glitchState(callback);
                 }
                 
-            }, getRandomInt(this.options.glitchState.min, this.options.glitchState.max));
+            }, random(this.options.glitchState.min, this.options.glitchState.max));
         }
         else {
             callback.call();

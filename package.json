@@ -8,9 +8,11 @@
     "add": "^2.0.6",
     "animejs": "^2.2.0",
     "charming": "^2.2.4",
+    "debounce": "^1.2.0",
     "imagesloaded": "^4.1.4",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
+    "lodash": "^4.17.11",
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0",
     "react-scripts": "1.1.4",
     "yarn": "^1.9.4"
   },

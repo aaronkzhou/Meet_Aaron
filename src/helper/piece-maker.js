@@ -1,24 +1,46 @@
 import anime from 'animejs'
-import { extend, debounce, getMousePos } from './'
+import debounce from 'debounce'
 
 const is3DBuggy = navigator.userAgent.indexOf('Firefox') > 0
 
-export class PieceMaker {
+const getMousePos = e => {
+    let posx = 0;
+    let posy = 0;
+
+    if (!e) e = window.event;
+
+    if (e.pageX || e.pageY) {
+        posx = e.pageX;
+        posy = e.pageY;
+    } else if (e.clientX || e.clientY) {
+        posx = e.clientX + document.body.scrollLeft
+            + document.documentElement.scrollLeft;
+        posy = e.clientY + document.body.scrollTop
+            + document.documentElement.scrollTop;
+    }
+
+    return {
+        x : posx,
+        y : posy
+    }
+}
+
+export default class PieceMaker {
     constructor(el, options) {
         this.el = el;
-        this.options = extend({}, {
+        this.options = Object.assign({}, {
             // Number of pieces / Layout (rows x cols).
             pieces: {rows: 14, columns: 10},
             // Main image tilt: max and min angles.
             tilt: {maxRotationX: -2, maxRotationY: 3, maxTranslationX: 6, maxTranslationY: -2}
         });
-        extend(this.options, options);
+        Object.assign(this.options, options);
         this._init();
     }
 
     _init() {
         // The source of the main image.
-        this.imgsrc = this.el.style.backgroundImage.replace('url(','').replace(')','').replace(/\"/gi, "");
+        this.imgsrc = this.el.style.backgroundImage.replace('url(','').replace(')','').replace(/"/gi, "");
         // Window sizes.
         this.win = {width: window.innerWidth, height: window.innerHeight};
         // Container sizes.
