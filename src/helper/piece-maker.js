@@ -32,7 +32,7 @@ export default class PieceMaker {
             // Number of pieces / Layout (rows x cols).
             pieces: {rows: 14, columns: 10},
             // Main image tilt: max and min angles.
-            tilt: {maxRotationX: -2, maxRotationY: 3, maxTranslationX: 6, maxTranslationY: -2}
+            tilt: { maxRotationX: -2, maxRotationY: 3, maxTranslationX: 6, maxTranslationY: -2 }
         });
         Object.assign(this.options, options);
         this._init();
@@ -191,18 +191,16 @@ export default class PieceMaker {
         anime({
             targets: this.pieces.reverse(),
             duration: dir === 'out' ? 600 : 500,
-            delay: function(t,i) {
-                return Math.max(0,i*6 + parseInt(t.getAttribute('data-delay')));
-            },
+            delay: (t,i) => Math.max(0, i * 6 + parseInt(t.getAttribute('data-delay'), 10)),
             easing: dir === 'out' ? [0.2,1,0.3,1] : [0.8,1,0.3,1],
             translateX: dir === 'out' ? function(t,i) { 
                 return t.getAttribute('data-column') < self.options.pieces.columns/2 ? anime.random(50,100) : anime.random(-100,-50);
-            } : function(t,i) { 
+            } : (t,i) => { 
                 return t.getAttribute('data-column') < self.options.pieces.columns/2 ? [anime.random(50,100),0] : [anime.random(-100,-50),0];
             },
-            translateY: dir === 'out' ? function(t,i) { 
+            translateY: dir === 'out' ? (t,i) => { 
                 return [0,anime.random(-1000,-800)]; 
-            } : function(t,i) { 
+            } : (t,i) => { 
                 return [anime.random(-1000,-800), 0]; 
             },
             opacity: {
@@ -224,12 +222,12 @@ export default class PieceMaker {
             duration: dir === 'left' ? 400 : 200,
             easing: dir === 'left' ? [0.2,1,0.3,1] : [0.8,0,0.7,0],
             delay: function(t,i,c) {
-                return dir === 'left' ? Math.max(0,i*5 + parseInt(t.getAttribute('data-delay'))) : Math.max(0,(c-1-i)*2 + parseInt(t.getAttribute('data-delay')));
+                return dir === 'left' ? Math.max(0,i * 5 + parseInt(t.getAttribute('data-delay'), 10)) : Math.max(0,(c-1-i)*2 + parseInt(t.getAttribute('data-delay'), 10));
             },
-            translateX: function(t,i) { 
+            translateX: (t,i) => { 
                 return dir === 'left' ? anime.random(-500,-100) : [anime.random(-500,-100), 0];
             },
-            translateY: function(t,i) { 
+            translateY: (t,i) => { 
                 return dir === 'left' ? anime.random(0,100) : [anime.random(0,100), 0];
             },
             opacity: {
@@ -250,13 +248,13 @@ export default class PieceMaker {
             }),
             duration: dir === 'left' ? 200 : 400,
             easing: dir === 'left' ? [0.8,0,0.7,0] : [0.2,1,0.3,1],
-            delay: function(t,i,c) {
-                return dir === 'left' ? Math.max(0,(c-1-i)*2 + parseInt(t.getAttribute('data-delay'))) : Math.max(0,i*5 + parseInt(t.getAttribute('data-delay')));
+            delay: (t,i,c) => {
+                return dir === 'left' ? Math.max(0, (c-1-i) * 2 + parseInt(t.getAttribute('data-delay'), 10)) : Math.max(0,i * 5 + parseInt(t.getAttribute('data-delay'), 10));
             },
-            translateX: function(t,i) {
+            translateX: (t,i) => {
                 return dir === 'left' ? 0 : anime.random(-500,-100);
             },
-            translateY: function(t,i) {
+            translateY: (t,i) => {
                 return dir === 'left' ? 0 : anime.random(0,100);
             },
             opacity: {

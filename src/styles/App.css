@@ -7,7 +7,7 @@ img,legend{
 .btn:focus,a,a:active,a:focus,a:hover{
   outline:0
 }
-.js .loading--hide,.overlay{
+.js .loading--hide,.overlay {
   pointer-events:none;
   opacity:0
 }
@@ -211,7 +211,7 @@ a:hover{
 .btn--menu,.btn--menu .icon--menu-alt,.btn--menu.mode--code .icon--menu{
   display:none
 }
-@keyframes animLoader{
+@keyframes animLoader {
   0%{
       content:'- - -'
   }
@@ -402,7 +402,7 @@ a:hover{
   background:rgba(107,87,86,.22)
 }
 @media screen and (max-height:38.5em){
-  .menu{
+  .menu {
       text-align:left
   }
 }
